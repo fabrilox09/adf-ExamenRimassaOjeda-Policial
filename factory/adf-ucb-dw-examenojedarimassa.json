@@ -1,0 +1,10 @@
+{
+	"name": "adf-ucb-dw-examenojedarimassa",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "brazilsouth"
+}
