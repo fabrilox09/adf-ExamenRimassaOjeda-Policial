@@ -1,0 +1,47 @@
+{
+	"name": "Rangos_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Datalake_Policial",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "bronze"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "tbl_rangos.csv",
+				"container": "bronze"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id_rango",
+				"type": "String"
+			},
+			{
+				"name": "nombre",
+				"type": "String"
+			},
+			{
+				"name": "categoria",
+				"type": "String"
+			},
+			{
+				"name": "nivel_jerarquico",
+				"type": "String"
+			},
+			{
+				"name": "abreviatura",
+				"type": "String"
+			}
+		]
+	}
+}
