@@ -1,0 +1,55 @@
+{
+	"name": "CSVUnidades",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Datalake_Policial",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Bronze"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "tbl_unidades.csv",
+				"container": "bronze"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id_unidad",
+				"type": "String"
+			},
+			{
+				"name": "id_brigada",
+				"type": "String"
+			},
+			{
+				"name": "nombre",
+				"type": "String"
+			},
+			{
+				"name": "codigo",
+				"type": "String"
+			},
+			{
+				"name": "ciudad",
+				"type": "String"
+			},
+			{
+				"name": "departamento",
+				"type": "String"
+			},
+			{
+				"name": "tipo_cuartel",
+				"type": "String"
+			}
+		]
+	}
+}

@@ -1,0 +1,33 @@
+{
+	"name": "BronzeEspecialidades",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dw_policial",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Bronze"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_especialidad",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "varchar"
+			},
+			{
+				"name": "area",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "bronze",
+			"table": "especialidades"
+		}
+	}
+}

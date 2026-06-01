@@ -1,0 +1,33 @@
+{
+	"name": "BronzeTipoDeOperacion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dw_policial",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Bronze"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_tipo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "varchar"
+			},
+			{
+				"name": "categoria",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "bronze",
+			"table": "tipos_operacion"
+		}
+	}
+}

@@ -1,0 +1,44 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"folder": {
+			"name": "Silver"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "bronzeEfectivos",
+						"type": "DatasetReference"
+					},
+					"name": "source1",
+					"description": "Import data from bronzeEfectivos\n"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          id_efectivo as integer,",
+				"          id_especialidad as integer,",
+				"          id_unidad_actual as integer,",
+				"          id_rango_actual as integer,",
+				"          nombre as string,",
+				"          ci as string,",
+				"          fecha_nacimiento as string,",
+				"          genero as string,",
+				"          departamento_origen as string,",
+				"          fecha_ingreso as string,",
+				"          estado as string,",
+				"          salario_mensual as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: 'SELECT\\n\\nTRIM(ci) as ci,\\nTRIM(departamento_origen) as departamento_origen,\\nTrim(estado) as estado,\\nTrim(fecha_ingreso) as fecha_ingreso,\\nTrim(fecha_nacimiento) as fecha_nacimiento,\\nTrim(genero as genero,\\nTrim(id_efectivo) as id_efectivo,\\nTrim(id_especialidad) as id_especialidad,\\nTrim(id_rango_actual) as id_rango_actual,\\nTrim(id_unidad_actual) as id_unidad_actual,\\nTrim(nombre) as nombre,\\nTrim(salario_mensual) as salario_mensual\\nFROM bronze.bronzeEfectivos \\nwhere id_efectivo IS NOT NULL AND TRIM(id_efectivo) <> \" \"',",
+				"     format: 'query') ~> source1"
+			]
+		}
+	}
+}

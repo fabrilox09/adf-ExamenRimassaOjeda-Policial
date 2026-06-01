@@ -1,0 +1,39 @@
+{
+	"name": "CSVTiposMovimiento",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Datalake_Policial",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Bronze"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "tbl_tipos_movimiento.csv",
+				"container": "bronze"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id_tipo",
+				"type": "String"
+			},
+			{
+				"name": "nombre",
+				"type": "String"
+			},
+			{
+				"name": "descripcion",
+				"type": "String"
+			}
+		]
+	}
+}
