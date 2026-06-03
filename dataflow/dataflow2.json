@@ -113,6 +113,9 @@
 				},
 				{
 					"name": "derivedColumn11"
+				},
+				{
+					"name": "derivedColumn12"
 				}
 			],
 			"scriptLines": [
@@ -307,13 +310,16 @@
 				"          departamento_origen = case(   \r",
 				"in(['Nbeni','NBENI','Nbn.','Nbn','NBeni','NBn.','NBn'], departamento_origen), 'Beni',  \r",
 				"in(['NCBBA','NCbba','Ncbba','NCochabamba','NCOCHABAMBA','Ncochabamba','NCbba.'], departamento_origen), 'Cochabamba',   \r",
-				"in(['NLP','NLp','Nlp','NLA PAZ','Nla paz','NLP.','NL.P.','NLaPaz','NLa Paz','NLa Paz ',' NLa Paz'], departamento_origen), 'La Paz', \r",
+				"in(['NLP','NLp','Nlp','NLA PAZ','Nla paz','NLP.','NL.P.','NLaPaz','NLa Paz','NLa Paz ',' NLa Paz',\"NLa Paz\"], departamento_origen), 'La Paz', \r",
 				"in(['NOR','Nor','NOr','NOR.','NOr.','NORURO','Noruro',' NOruro'], departamento_origen), 'Oruro',      \r",
 				"in(['NPando','NPANDO'], departamento_origen), 'Pando',   \r",
-				"in(['Npotosi','Npt','NPT','Npt.','NPt.','NPotosi','NPOTOSI',' NPt'], departamento_origen), 'Potosi',    \r",
+				"in(['Npotosi','Npt','NPT','Npt.','NPt.','NPotosi','NPOTOSI','NPt'], departamento_origen), 'Potosi',    \r",
 				"in(['NTarija','NTARIJA','Ntarija','NTj','NTJ','Ntj','NTj.',' NTJ.'], departamento_origen), 'Tarija',    \r",
-				"in(['Npotosi','Npt','NPT','Npt.','NPt.','NPotosi','NPOTOSI',' NPt'], departamento_origen), 'Santa Cruz',           \r",
-				"departamento_origen )) ~> derivedColumn11"
+				"in(['NSta. Cruz', 'NSanta Cruz','NSANTA CRUZ','Nsanta cruz','NSC','NSta Cruz','NSCZ'], departamento_origen), 'Santa Cruz',           \r",
+				"departamento_origen )\r",
+				") ~> derivedColumn11",
+				"derivedColumn11 derive(departamento_origen = regexReplace(departamento_origen,'[/^N/]',''),",
+				"          nombre = regexReplace(nombre,'[/^N/]','')) ~> derivedColumn12"
 			]
 		}
 	}
