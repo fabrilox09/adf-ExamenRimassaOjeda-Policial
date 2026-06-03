@@ -28,6 +28,55 @@
 						"type": "DatasetReference"
 					},
 					"name": "source3"
+				},
+				{
+					"dataset": {
+						"referenceName": "BronzeMovimientosPersonal",
+						"type": "DatasetReference"
+					},
+					"name": "source4"
+				},
+				{
+					"dataset": {
+						"referenceName": "BronzeOperations",
+						"type": "DatasetReference"
+					},
+					"name": "source5"
+				},
+				{
+					"dataset": {
+						"referenceName": "BronzeRangos",
+						"type": "DatasetReference"
+					},
+					"name": "source6"
+				},
+				{
+					"dataset": {
+						"referenceName": "BronzeTipoDeOperacion",
+						"type": "DatasetReference"
+					},
+					"name": "source7"
+				},
+				{
+					"dataset": {
+						"referenceName": "BronzeTiposDeMovimiento",
+						"type": "DatasetReference"
+					},
+					"name": "source8"
+				},
+				{
+					"dataset": {
+						"referenceName": "BronzeUnidades",
+						"type": "DatasetReference"
+					},
+					"name": "source9"
+				},
+				{
+					"dataset": {
+						"referenceName": "BronzeZonas",
+						"type": "DatasetReference"
+					},
+					"name": "source10"
 				}
 			],
 			"sinks": [],
@@ -40,6 +89,30 @@
 				},
 				{
 					"name": "derivedColumn3"
+				},
+				{
+					"name": "derivedColumn4"
+				},
+				{
+					"name": "derivedColumn5"
+				},
+				{
+					"name": "derivedColumn6"
+				},
+				{
+					"name": "derivedColumn7"
+				},
+				{
+					"name": "derivedColumn8"
+				},
+				{
+					"name": "derivedColumn9"
+				},
+				{
+					"name": "derivedColumn10"
+				},
+				{
+					"name": "derivedColumn11"
 				}
 			],
 			"scriptLines": [
@@ -83,6 +156,99 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source3",
+				"source(output(",
+				"          id_movimiento as integer,",
+				"          id_efectivo as integer,",
+				"          id_unidad_destino as integer,",
+				"          id_rango as integer,",
+				"          id_tipo as integer,",
+				"          fecha_movimiento as string,",
+				"          antiguedad_anios as string,",
+				"          salario_mensual as string,",
+				"          observaciones as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source4",
+				"source(output(",
+				"          id_operacion as integer,",
+				"          id_tipo as integer,",
+				"          id_unidad_resp as integer,",
+				"          id_zona as integer,",
+				"          nombre_operacion as string,",
+				"          fecha_inicio as string,",
+				"          fecha_fin as string,",
+				"          efectivos_desplegados as string,",
+				"          vehiculos_utilizados as string,",
+				"          duracion_dias as string,",
+				"          costo_operacion as string,",
+				"          resultado as string,",
+				"          detenidos as string,",
+				"          area_km2 as string,",
+				"          incidentes as string,",
+				"          observaciones as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source5",
+				"source(output(",
+				"          id_rango as integer,",
+				"          nombre as string,",
+				"          categoria as string,",
+				"          nivel_jerarquico as integer,",
+				"          abreviatura as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source6",
+				"source(output(",
+				"          id_tipo as integer,",
+				"          nombre as string,",
+				"          categoria as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source7",
+				"source(output(",
+				"          id_tipo as integer,",
+				"          nombre as string,",
+				"          descripcion as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source8",
+				"source(output(",
+				"          id_unidad as integer,",
+				"          id_brigada as integer,",
+				"          nombre as string,",
+				"          codigo as string,",
+				"          ciudad as string,",
+				"          departamento as string,",
+				"          tipo_cuartel as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source9",
+				"source(output(",
+				"          id_zona as integer,",
+				"          nombre as string,",
+				"          departamento as string,",
+				"          frontera_con as string,",
+				"          tipo_terreno as string,",
+				"          altitud_msnm as integer,",
+				"          nivel_riesgo as string,",
+				"          acceso_carretero as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source10",
 				"source1 derive(ci = trim( ci ,\" \"),",
 				"          fecha_nacimiento = trim( fecha_nacimiento ,\" \"),",
 				"          genero = trim( genero,\" \"),",
@@ -90,8 +256,53 @@
 				"          fecha_ingreso = trim( fecha_ingreso ,\" \"),",
 				"          estado = trim( estado ,\" \"),",
 				"          salario_mensual = trim( salario_mensual ,\" \")) ~> derivedColumn1",
-				"source2 derive() ~> derivedColumn2",
-				"source3 derive() ~> derivedColumn3"
+				"source2 derive(nombre = trim( nombre ,\" \"),",
+				"          area = trim(area, \" \")) ~> derivedColumn2",
+				"source3 derive(nivel = trim( nivel ,\" \"),",
+				"          nombre = trim( nombre ,\" \"),",
+				"          sigla = trim( sigla  ,\" \"),",
+				"          tipo = trim( tipo ,\" \"),",
+				"          cobertura_departamentos = trim( cobertura_departamentos ,\" \")) ~> derivedColumn3",
+				"source4 derive(fecha_movimiento = trim( fecha_movimiento,\" \"),",
+				"          antiguedad_anios = trim(antiguedad_anios,\" \"),",
+				"          salario_mensual = trim( salario_mensual ,\" \"),",
+				"          observaciones = trim( observaciones ,\" \")) ~> derivedColumn4",
+				"source5 derive(nombre_operacion = trim( nombre_operacion ,\" \"),",
+				"          fecha_inicio = trim( fecha_inicio ,\" \"),",
+				"          fecha_fin = trim( fecha_fin ,\" \"),",
+				"          observaciones = trim( observaciones ,\" \"),",
+				"          incidentes = trim( incidentes ,\" \"),",
+				"          area_km2 = trim( area_km2 ,\" \"),",
+				"          detenidos = trim( detenidos,\" \"),",
+				"          resultado = trim( resultado ,\" \"),",
+				"          costo_operacion = trim( costo_operacion ,\" \"),",
+				"          duracion_dias = trim( duracion_dias ,\" \"),",
+				"          vehiculos_utilizados = trim( vehiculos_utilizados ,\" \"),",
+				"          efectivos_desplegados = trim( efectivos_desplegados ,\" \")) ~> derivedColumn5",
+				"source6 derive(nombre = trim( nombre ,\" \"),",
+				"          categoria = trim( categoria ,\" \"),",
+				"          abreviatura = trim( abreviatura ,\" \")) ~> derivedColumn6",
+				"source7 derive(nombre = trim( nombre ,\" \"),",
+				"          categoria = trim( categoria ,\" \")) ~> derivedColumn7",
+				"source8 derive(nombre = trim( nombre ,\" \"),",
+				"          descripcion = trim( descripcion ,\" \")) ~> derivedColumn8",
+				"source9 derive(nombre = trim( nombre,\" \"),",
+				"          codigo = trim( codigo ,\" \"),",
+				"          ciudad = trim( ciudad ,\" \"),",
+				"          departamento = trim( departamento ,\" \"),",
+				"          tipo_cuartel = trim( tipo_cuartel ,\" \")) ~> derivedColumn9",
+				"source10 derive(nombre = trim( nombre ,\" \"),",
+				"          departamento = trim( departamento ,\" \"),",
+				"          frontera_con = trim( frontera_con ,\" \"),",
+				"          tipo_terreno = trim( tipo_terreno ,\" \"),",
+				"          nivel_riesgo = trim( nivel_riesgo ,\" \")) ~> derivedColumn10",
+				"derivedColumn1 derive(estado = case(\r",
+				"    in(['A','ACTIVO',\"activo\",\"act\",\"Act\",\"activo.\",\"activo.\",'ACTV','Act.',\"EN ACTIVIDAD\", \"en actividad\"], estado), 'Activo',\r",
+				"    in(['R','r','rsv','RSV','RESERVA','Reserva','reserva','Rsv','en reserva'],estado),'Reservado',\r",
+				"    in(['baja','BAJA','de baja','bia','DE BAJA','dado de baja','Bja','DADO DE BAJA', 'Sin Dato'],estado), 'Baja',\r",
+				"    estado\r",
+				"),",
+				"          salario_mensual = toFloat(regexReplace(toString(salario_mensual),'[^0-9.]',''))) ~> derivedColumn11"
 			]
 		}
 	}
