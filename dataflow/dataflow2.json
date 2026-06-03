@@ -14,10 +14,34 @@
 					},
 					"name": "source1",
 					"description": "Import data from bronzeEfectivos\n"
+				},
+				{
+					"dataset": {
+						"referenceName": "BronzeEspecialidades",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				},
+				{
+					"dataset": {
+						"referenceName": "BronzeEstructurasOrganizacional",
+						"type": "DatasetReference"
+					},
+					"name": "source3"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "derivedColumn3"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          id_efectivo as integer,",
@@ -36,8 +60,38 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'SELECT\\n\\nTRIM(ci) as ci,\\nTRIM(departamento_origen) as departamento_origen,\\nTrim(estado) as estado,\\nTrim(fecha_ingreso) as fecha_ingreso,\\nTrim(fecha_nacimiento) as fecha_nacimiento,\\nTrim(genero as genero,\\nTrim(id_efectivo) as id_efectivo,\\nTrim(id_especialidad) as id_especialidad,\\nTrim(id_rango_actual) as id_rango_actual,\\nTrim(id_unidad_actual) as id_unidad_actual,\\nTrim(nombre) as nombre,\\nTrim(salario_mensual) as salario_mensual\\nFROM bronze.bronzeEfectivos \\nwhere id_efectivo IS NOT NULL AND TRIM(id_efectivo) <> \" \"',",
-				"     format: 'query') ~> source1"
+				"     format: 'table') ~> source1",
+				"source(output(",
+				"          id_especialidad as integer,",
+				"          nombre as string,",
+				"          area as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
+				"source(output(",
+				"          id_estructura as integer,",
+				"          id_padre as integer,",
+				"          nivel as string,",
+				"          nombre as string,",
+				"          sigla as string,",
+				"          tipo as string,",
+				"          cobertura_departamentos as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source3",
+				"source1 derive(ci = trim( ci ,\" \"),",
+				"          fecha_nacimiento = trim( fecha_nacimiento ,\" \"),",
+				"          genero = trim( genero,\" \"),",
+				"          departamento_origen = trim( departamento_origen ,\" \"),",
+				"          fecha_ingreso = trim( fecha_ingreso ,\" \"),",
+				"          estado = trim( estado ,\" \"),",
+				"          salario_mensual = trim( salario_mensual ,\" \")) ~> derivedColumn1",
+				"source2 derive() ~> derivedColumn2",
+				"source3 derive() ~> derivedColumn3"
 			]
 		}
 	}
