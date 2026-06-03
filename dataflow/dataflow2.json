@@ -302,7 +302,14 @@
 				"    in(['baja','BAJA','de baja','bia','DE BAJA','dado de baja','Bja','DADO DE BAJA', 'Sin Dato'],estado), 'Baja',\r",
 				"    estado\r",
 				"),",
-				"          salario_mensual = toFloat(regexReplace(toString(salario_mensual),'[^0-9.]',''))) ~> derivedColumn11"
+				"          salario_mensual = toFloat(regexReplace(toString(salario_mensual),'[^0-9.]','')),",
+				"          ci = regexReplace(toString(ci),'[^0-9]',''),",
+				"          departamento_origen = case(   \r",
+				"in(['Nbeni','NBENI','Nbn.','Nbn','NBeni','NBn.','NBn'], departamento_origen), 'Beni',  \r",
+				"in(['NCBBA','NCbba','Ncbba','NCochabamba','NCOCHABAMBA','Ncochabamba','NCbba.'], departamento_origen), 'Cochabamba',   \r",
+				"in(['NLP','NLp','Nlp','NLA PAZ','Nla paz','NLP.','NL.P.','NLaPaz','NLa Paz','NLa Paz ',' NLa Paz'], departamento_origen), 'La Paz', \r",
+				"in(['NOR','Nor','NOr','NOR.','NOr.','NORURO','Noruro',' NOruro'], departamento_origen), 'Oruro',        \r",
+				"departamento_origen )) ~> derivedColumn11"
 			]
 		}
 	}
