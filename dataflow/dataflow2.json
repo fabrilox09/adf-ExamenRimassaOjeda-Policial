@@ -82,13 +82,6 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "EfectivosSilver",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				},
-				{
-					"dataset": {
 						"referenceName": "SilverRangos",
 						"type": "DatasetReference"
 					},
@@ -107,6 +100,9 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink5"
+				},
+				{
+					"name": "sink6"
 				}
 			],
 			"transformations": [
@@ -510,45 +506,6 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join3",
-				"join3 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          id_efectivo as integer,",
-				"          id_especialidad as integer,",
-				"          id_unidad_actual as integer,",
-				"          id_rango_actual as integer,",
-				"          nombre as string,",
-				"          ci as string,",
-				"          fecha_nacimiento as date,",
-				"          genero as string,",
-				"          departamento_origen as string,",
-				"          fecha_ingreso as date,",
-				"          estado as string,",
-				"          salario_mensual as decimal(12,2)",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     format: 'table',",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     saveOrder: 0,",
-				"     errorHandlingOption: 'stopOnFirstError',",
-				"     mapColumn(",
-				"          id_efectivo,",
-				"          id_especialidad,",
-				"          id_unidad_actual,",
-				"          id_rango_actual,",
-				"          nombre,",
-				"          ci,",
-				"          fecha_nacimiento,",
-				"          genero,",
-				"          departamento_origen,",
-				"          fecha_ingreso,",
-				"          estado,",
-				"          salario_mensual",
-				"     )) ~> sink1",
 				"derivedColumn6 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -630,7 +587,11 @@
 				"          altitud_msnm,",
 				"          nivel_riesgo,",
 				"          acceso_carretero",
-				"     )) ~> sink5"
+				"     )) ~> sink5",
+				"join3 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink6"
 			]
 		}
 	}
