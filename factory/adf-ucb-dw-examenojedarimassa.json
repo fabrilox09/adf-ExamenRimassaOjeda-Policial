@@ -2,7 +2,7 @@
 	"name": "adf-ucb-dw-examenojedarimassa",
 	"properties": {
 		"trustModeClaimForMi": {
-			"value": "Enabled",
+			"value": "Disabled",
 			"editable": true
 		}
 	},
