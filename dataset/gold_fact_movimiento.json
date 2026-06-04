@@ -1,0 +1,60 @@
+{
+	"name": "gold_fact_movimiento",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dw_policial",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "gold"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "movimiento_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "id_movimiento",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_efectivo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_unidad_destino",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_rango",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_tipo_movimiento",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "fecha_movimiento",
+				"type": "date"
+			},
+			{
+				"name": "salario",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "gold",
+			"table": "fact_movimientos"
+		}
+	}
+}

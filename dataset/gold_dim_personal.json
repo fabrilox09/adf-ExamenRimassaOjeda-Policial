@@ -1,0 +1,62 @@
+{
+	"name": "gold_dim_personal",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dw_policial",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "gold"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "personal_key",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_efectivo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "varchar"
+			},
+			{
+				"name": "genero",
+				"type": "varchar"
+			},
+			{
+				"name": "departamento_origen",
+				"type": "varchar"
+			},
+			{
+				"name": "especialidad",
+				"type": "varchar"
+			},
+			{
+				"name": "rango",
+				"type": "varchar"
+			},
+			{
+				"name": "unidad_actual",
+				"type": "varchar"
+			},
+			{
+				"name": "fecha_ingreso",
+				"type": "date"
+			},
+			{
+				"name": "estado",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "gold",
+			"table": "dim_personal"
+		}
+	}
+}

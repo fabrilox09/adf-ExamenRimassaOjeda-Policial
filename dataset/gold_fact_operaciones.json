@@ -1,0 +1,69 @@
+{
+	"name": "gold_fact_operaciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dw_policial",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "gold"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "operacion_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "id_operacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_tipo_operacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_unidad",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_zona",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "fecha_inicio",
+				"type": "date"
+			},
+			{
+				"name": "fecha_fin",
+				"type": "date"
+			},
+			{
+				"name": "efectivos_desplegados",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "detenidos",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "costo_operacion",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "gold",
+			"table": "fact_operaciones"
+		}
+	}
+}
