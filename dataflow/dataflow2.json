@@ -189,7 +189,8 @@
 					"name": "join3"
 				},
 				{
-					"name": "aggregate1"
+					"name": "filter1",
+					"description": "!isNull(id_unidad)"
 				}
 			],
 			"scriptLines": [
@@ -534,21 +535,7 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join3",
-				"join3 aggregate(groupBy(id_efectivo,",
-				"          source1@id_especialidad,",
-				"          id_unidad_actual,",
-				"          id_rango_actual,",
-				"          derivedColumn13@nombre,",
-				"          ci,",
-				"          fecha_nacimiento,",
-				"          genero,",
-				"          departamento_origen,",
-				"          fecha_ingreso,",
-				"          salario_mensual,",
-				"          estado,",
-				"          nombreEspecialidad = derivedColumn2@nombre,",
-				"          area),",
-				"     count = sum(salario_mensual)) ~> aggregate1",
+				"derivedColumn16 filter(!isNull(id_unidad)) ~> filter1",
 				"derivedColumn6 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -573,7 +560,7 @@
 				"          nivel_jerarquico,",
 				"          abreviatura",
 				"     )) ~> sink2",
-				"derivedColumn16 sink(allowSchemaDrift: true,",
+				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          id_unidad as integer,",
@@ -631,7 +618,7 @@
 				"          nivel_riesgo,",
 				"          acceso_carretero",
 				"     )) ~> sink5",
-				"aggregate1 sink(allowSchemaDrift: true,",
+				"join3 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          id_efectivo as integer,",
