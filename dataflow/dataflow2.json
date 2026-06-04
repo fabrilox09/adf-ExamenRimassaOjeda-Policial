@@ -316,10 +316,28 @@
 				"in(['Npotosi','Npt','NPT','Npt.','NPt.','NPotosi','NPOTOSI','NPt'], departamento_origen), 'Potosi',    \r",
 				"in(['NTarija','NTARIJA','Ntarija','NTj','NTJ','Ntj','NTj.',' NTJ.'], departamento_origen), 'Tarija',    \r",
 				"in(['NSta. Cruz', 'NSanta Cruz','NSANTA CRUZ','Nsanta cruz','NSC','NSta Cruz','NSCZ'], departamento_origen), 'Santa Cruz',           \r",
-				"departamento_origen )\r",
-				") ~> derivedColumn11",
+				"departamento_origen )) ~> derivedColumn11",
 				"derivedColumn11 derive(departamento_origen = regexReplace(departamento_origen,'[/^N/]',''),",
-				"          nombre = regexReplace(nombre,'[/^N/]','')) ~> derivedColumn12"
+				"          nombre = regexReplace(nombre,'[/^N/]',''),",
+				"          genero = case(\r",
+				"    in(['Hombre','hombre','HOMBRE','Masc.','MASCULINO','masculino','h','m','M','H','masc','Masculino'],genero),'M',\r",
+				"    in(['Mujer','femenino','MUJER','Fem.','FEMENINO','FEM','fem','mujer','FEM','Femenino','F.'],genero),'F',\r",
+				"    genero\r",
+				"\r",
+				"),",
+				"          fecha_ingreso = coalesce(\r",
+				"  toDate(trim(fecha_ingreso), 'yyyy-dd-MM'),\r",
+				"  toDate(trim(fecha_ingreso), 'dd/MM/yyyy'),\r",
+				"  toDate(trim(fecha_ingreso), 'MM/dd/yyyy'),\r",
+				"  toDate(trim(fecha_ingreso), 'dd-MM-yyyy'),\r",
+				"  toDate(trim(fecha_ingreso), 'dd.MM.yyyy'),\r",
+				"  toDate(trim(fecha_ingreso), 'yyyyMMdd'),\r",
+				"  toDate(trim(fecha_ingreso), 'dd MMM yyyy', 'en-US'),\r",
+				"  toDate(trim(fecha_ingreso), 'MMMM dd, yyyy', 'en-US'),\r",
+				"  toDate(regexReplace(lower(trim(fecha_ingreso)), ',', ''), 'dd MMMM yyyy', 'es-ES'),\r",
+				"  toDate(regexReplace(regexReplace(lower(trim(fecha_ingreso)), ' de ', ' '), ',', ''), 'dd MMMM yyyy', 'es-ES'),\r",
+				"  null()\r",
+				")) ~> derivedColumn12"
 			]
 		}
 	}
