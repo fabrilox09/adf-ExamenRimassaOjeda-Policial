@@ -96,13 +96,6 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "Silver_Especialidad",
-						"type": "DatasetReference"
-					},
-					"name": "sink3"
-				},
-				{
-					"dataset": {
 						"referenceName": "SilverUnidad",
 						"type": "DatasetReference"
 					},
@@ -170,6 +163,9 @@
 				},
 				{
 					"name": "join2"
+				},
+				{
+					"name": "join3"
 				}
 			],
 			"scriptLines": [
@@ -509,7 +505,12 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join2",
-				"derivedColumn13 sink(allowSchemaDrift: true,",
+				"derivedColumn13, derivedColumn2 join(source1@id_especialidad == source2@id_especialidad,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join3",
+				"join3 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          id_efectivo as integer,",
@@ -572,26 +573,6 @@
 				"          nivel_jerarquico,",
 				"          abreviatura",
 				"     )) ~> sink2",
-				"derivedColumn2 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          id_especialidad as integer,",
-				"          especialidad as string,",
-				"          area as string",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     format: 'table',",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError',",
-				"     mapColumn(",
-				"          id_especialidad,",
-				"          especialidad = nombre,",
-				"          area",
-				"     )) ~> sink3",
 				"derivedColumn16 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
